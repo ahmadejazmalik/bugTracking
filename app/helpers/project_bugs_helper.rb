@@ -1,0 +1,2 @@
+module ProjectBugsHelper
+end

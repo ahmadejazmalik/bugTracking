@@ -1,0 +1,29 @@
+<%= form_with(model: project_bug) do |form| %>
+  <%= hidden_field_tag :project_id, params[:project_id]%>
+  <% if project_bug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project_bug.errors.count, "error") %> prohibited this project_bug from being saved:</h2>
+      <ul>
+        <% project_bug.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_select :deadline %>
+  </div>
+<!--  <div class="field">-->
+    <%#= form.label :type %>
+    <%#= form.text_field :type %>
+<!--  </div>-->
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,39 @@
+
+
+<div style=" margin-left:50px; height: 500px; width: 1000px; background-color: lightblue; text-align: center" >
+<br>
+  <br>
+  <br>
+<%= form_with(model: project) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+        <% project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+<h1>Add Developer</h1>
+
+  <% User.where(user_type: "developer").each do |user|%>
+        <%= label_tag user.email, nil%>
+        <%= form.check_box :user_ids, { multiple: true }, user.id, false %>
+      <br>
+  <%end %>
+    <h1>Add QA</h1>
+    <% User.where(user_type: "QA").each do |user|%>
+      <%= label_tag user.email, nil%>
+      <%= form.check_box :user_ids, { multiple: true }, user.id, false %>
+    <%end %>
+  <div class="actions">
+    <%= form.submit%>
+  </div>
+<% end %>
+</div>
