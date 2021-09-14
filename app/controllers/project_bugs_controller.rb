@@ -42,14 +42,13 @@ class ProjectBugsController < ApplicationController
     end
   end
   def assign_bug
-
   end
 
   # DELETE /project_bugs/1 or /project_bugs/1.json
   def destroy
     @project_bug.destroy
     respond_to do |format|
-      format.html { redirect_to project_bugs_url, notice: "Project bug was successfully destroyed." }
+      format.html { redirect_to project_bugs_url(project_id: @project_bug.project.id), notice: "Project bug was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -62,6 +61,6 @@ class ProjectBugsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_bug_params
-      params.require(:project_bug).permit(:title, :deadline, :project_id)
+      params.require(:project_bug).permit(:title, :deadline, :project_id, :description, :status, :bug_type, :screenshot)
     end
 end

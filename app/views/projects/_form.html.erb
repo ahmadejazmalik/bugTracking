@@ -28,7 +28,7 @@
       <br>
   <%end %>
     <h1>Add QA</h1>
-    <% User.where(user_type: "QA").each do |user|%>
+    <% User.where(user_type: "qa").each do |user|%>
       <%= label_tag user.email, nil%>
       <%= form.check_box :user_ids, { multiple: true }, user.id, false %>
     <%end %>

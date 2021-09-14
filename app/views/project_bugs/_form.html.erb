@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+  <div style="background-color: lightblue; height: auto; width: auto; text-align: center">
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -18,6 +19,20 @@
     <%= form.label :deadline %>
     <%= form.date_select :deadline %>
   </div>
+  <div class="field">
+    <%= form.label :screenshot %>
+    <%= form.file_field :screenshot %>
+  </div>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div class="field">
+    <%= form.label "Type" %>
+    <%=form.select(:bug_type, options_for_select([['bug', 'bug'], ['feature','feature']])) %>
+  </div>
+  <%= form.hidden_field :status, :value => "new" %>
+
 <!--  <div class="field">-->
     <%#= form.label :type %>
     <%#= form.text_field :type %>
@@ -25,5 +40,6 @@
 
   <div class="actions">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>

@@ -12,7 +12,7 @@
         <li class="list-group-item">Vestibulum at eros</li>
       </ul>
       <div class="card-body">
-        <%= link_to bugs.title, "#", class: "card-link"%>
+        <%= link_to bugs.title, project_bug_path(bugs.id), class: "card-link"%>
       </div>
     </div>
 <% end %>

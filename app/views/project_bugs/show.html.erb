@@ -3,11 +3,23 @@
   <strong>Title:</strong>
   <%= @project_bug.title %>
 </p>
-
 <p>
   <strong>Deadline:</strong>
   <%= @project_bug.deadline %>
 </p>
+<strong>Bug Image:</strong>
+<div style="width: 400px; height: 400px" >
+<%=image_tag(@project_bug.screenshot, style: 'width: 100%') %>
+</div>
+<p>
+  <strong>Description:</strong>
+  <%= @project_bug.description %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @project_bug.status %>
+</p>
+<%= link_to 'Edit', edit_project_bug_path(@project_bug) %>|
+<%= link_to 'Delete bug', project_bug_path(@project_bug), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure" } %>
 
-<%= link_to 'Edit', edit_project_bug_path(@project_bug) %> |
 <%= link_to 'Back', project_bugs_path %>

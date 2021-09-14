@@ -1,22 +1,64 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%#= notice %></p>-->
 
-    <% @projects.each do |project| %>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <div class="card-body">
+    <%# @projects.each do |project| %>
+<!--  <div class="card" style="width: 18rem;">-->
+<!--    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--    <div class="card-body">-->
+<!--      <h5 class="card-title">Card title</h5>-->
+<!--      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--    </div>-->
+<!--    <div class="card-body">-->
 
-    <span class="card-link"><%= link_to project.name,project_bugs_path(project_id: project.id) %></span>
-      <%if current_user.user_type == "QA" %>
-      <%=link_to "Create Bug", new_project_bug_path(project_id: project)%>
-        <%end %>
+<!--    <span class="card-link"><%#= link_to project.name,project_bugs_path(project_id: project.id) %></span>-->
+      <%#if current_user.user_type == "QA" %>
+      <%#=link_to "Create Bug", new_project_bug_path(project_id: project)%>
+        <%#end %>
         <%#= link_to 'Show', project %>
         <%#= link_to 'Edit', edit_project_path(project) %>
         <%#= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
+<!--    </div>-->
+<!--  </div>-->
+<%#end %>
+<%#= link_to 'New Project', new_project_path %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5">
+  <% if @projects.any? %>
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="list-group">
+          <div class="list-group-item list-group-item-action active">
+            Projects
+          </div>
+          <% @projects.each do |project| %>
+            <div class="list-group-item list-group-item-action">
+<!--           <span>Project Name :   <%#= link_to project.name,project_bugs_path(project_id: project.id) %></span>-->
+              Project name : <%=link_to project.name, project_path(project)%>
+              <%#if current_user.user_type == "qa" %>
+                <%#=link_to "Create Bug", new_project_bug_path(project_id: project)%>
+              <%#end %>
+<!--              Project name : <%#=link_to project.name, project_path(project)%>-->
+            </div>
+          <%end %>
+        </div>
+      </div>
+  <% else %>
+    <p>No projects added by manager</p>
+  <%end %>
   </div>
-<%end %>
-<%= link_to 'New Project', new_project_path %>
+</div>
