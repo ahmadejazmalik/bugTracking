@@ -1,45 +1,133 @@
-<%= form_with(model: project_bug) do |form| %>
-  <%= hidden_field_tag :project_id, params[:project_id]%>
-  <% if project_bug.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project_bug.errors.count, "error") %> prohibited this project_bug from being saved:</h2>
-      <ul>
-        <% project_bug.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div style="background-color: lightblue; height: auto; width: auto; text-align: center">
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-  <div class="field">
-    <%= form.label :deadline %>
-    <%= form.date_select :deadline %>
-  </div>
-  <div class="field">
-    <%= form.label :screenshot %>
-    <%= form.file_field :screenshot %>
-  </div>
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-  <div class="field">
-    <%= form.label "Type" %>
-    <%=form.select(:bug_type, options_for_select([['bug', 'bug'], ['feature','feature']])) %>
-  </div>
-  <%= form.hidden_field :status, :value => "new" %>
+<%=link_to "Back to Bugs", project_bugs_path(project_id: params[:project_id]),class: 'btn btn-success'%>
+
+
+<%#= form_with(model: project_bug) do |form| %>
+  <%#= hidden_field_tag :project_id, params[:project_id]%>
+  <%# if flash[:error].present? %>
+<!--    <div id="error_explanation">-->
+<!--      <ul>-->
+<!--          <li><%#= flash[:error]%></li>-->
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div style="background-color: lightblue; height: auto; width: auto">-->
+<!--  <div class="field">-->
+    <%#= form.label :title %>
+    <%#= form.text_field :title %>
+<!--  </div>-->
+<!--  <div class="field">-->
+    <%#= form.label :deadline %>
+    <%#= form.date_select :deadline %>
+<!--  </div>-->
+<!--  <div class="field">-->
+    <%#= form.label :screenshot %>
+    <%#= form.file_field :screenshot %>
+<!--  </div>-->
+<!--  <div class="field">-->
+    <%#= form.label :description %>
+    <%#= form.text_area :description %>
+<!--  </div>-->
+<!--  <div class="field">-->
+    <%#= form.label "Type" %>
+    <%#=form.select(:bug_type, options_for_select([['bug', 'bug'], ['feature','feature']])) %>
+<!--  </div>-->
+  <%#= form.hidden_field :status, :value => "new" %>
 
 <!--  <div class="field">-->
     <%#= form.label :type %>
     <%#= form.text_field :type %>
 <!--  </div>-->
+<!--  <div class="actions">-->
+    <%#= form.submit %>
+<!--  </div>-->
+<!--  </div>-->
+<%# end %>
 
-  <div class="actions">
-    <%= form.submit %>
+
+
+
+
+
+<div style="background-color: lightblue" class="container m-5 p-5 justify-content-center" id="signUp">
+  <div class="signup-form">
+    <div class="col-xs-8 col-xs-offset-4">
+    </div>
+
+    <%= form_with(model: project_bug) do |form| %>
+      <%= hidden_field_tag :project_id, params[:project_id]%>
+      <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <ul>
+            <li><%= flash[:error]%></li>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :title, class:"control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= form.text_field :title, class:"form-control", required:"required",placeholder:"Title"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :deadline, class:"control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= form.date_select :deadline, class:"form-control"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :screenshot, class:"control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= form.file_field :screenshot, class:"form-control"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :description, class:"control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%= form.text_field :description, class:"form-control",required:"required",placeholder:"Description"%>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <%= form.label :bug_type, class:"control-label col-xs-4" %>
+        <div class="col-xs-8">
+          <%=form.select(:bug_type, options_for_select([['bug', 'bug'], ['feature','feature']])) %>
+        </div>
+      </div>
+      <%= form.hidden_field :status, :value => "new" %>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+      </div>
+    <% end %>
+
+<!--      <div class="form-group">-->
+        <%#= f.label :password, class:"control-label col-xs-4" %>
+        <%# if @minimum_password_length %>
+<!--          <em>(<%#= @minimum_password_length %> characters minimum)</em>-->
+<!--        <%# end %><br />-->
+<!--        <div class="col-xs-8">-->
+          <%#= f.password_field :password, class:"form-control", required:"required",autocomplete: "new-password", placeholder:"Enter password"%>
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+        <%#= f.label :password_confirmation, class:"control-label col-xs-4" %>
+<!--        <div class="col-xs-8">-->
+          <%#= f.password_field :password_confirmation, class:"form-control", required:"required", autocomplete: "new-password", placeholder:"Enter password again"%>
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+        <%#= f.submit "Sign up" , class: "btn btn-success"%>
+<!--      </div>-->
+    <%# end %>
+    <%#= render "devise/shared/links" %>
   </div>
-  </div>
-<% end %>
+</div>
+
+

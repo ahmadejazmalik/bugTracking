@@ -8,6 +8,9 @@ class ProjectBugsController < ApplicationController
   end
   # GET /project_bugs/1 or /project_bugs/1.json
   def show
+    if @project_bug.assigned_id != nil
+    @developer = User.find_by(id: @project_bug.assigned_id)
+    end
   end
   # GET /project_bugs/new
   def new
@@ -21,7 +24,11 @@ class ProjectBugsController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @project_bug=@project.project_bugs.create(project_bug_params)
-    redirect_to @project_bug
+    if @project_bug.errors.full_messages[0].present?
+      redirect_to request.referer,flash: {error: @project_bug.errors.full_messages[0]}
+    else
+      redirect_to @project_bug
+    end
     # p1=ProjectBug.find_by(id: params[:project_bug_id])
     # @project_bug = current_user.project_bugs.create(p1)
     # respond_to do |format|
@@ -32,6 +39,11 @@ class ProjectBugsController < ApplicationController
   # PATCH/PUT /project_bugs/1 or /project_bugs/1.json
   def update
     respond_to do |format|
+
+      if project_bug_params[:status] =="started"
+        @project_bug.assigned_id = current_user.id
+
+      end
       if @project_bug.update(project_bug_params)
         format.html { redirect_to @project_bug, notice: "Project bug was successfully updated." }
         format.json { render :show, status: :ok, location: @project_bug }

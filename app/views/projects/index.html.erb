@@ -47,11 +47,9 @@
           </div>
           <% @projects.each do |project| %>
             <div class="list-group-item list-group-item-action">
-<!--           <span>Project Name :   <%#= link_to project.name,project_bugs_path(project_id: project.id) %></span>-->
+<!--
+   <span>Project Name :   <%#= link_to project.name,project_bugs_path(project_id: project.id) %></span>-->
               Project name : <%=link_to project.name, project_path(project)%>
-              <%#if current_user.user_type == "qa" %>
-                <%#=link_to "Create Bug", new_project_bug_path(project_id: project)%>
-              <%#end %>
 <!--              Project name : <%#=link_to project.name, project_path(project)%>-->
             </div>
           <%end %>

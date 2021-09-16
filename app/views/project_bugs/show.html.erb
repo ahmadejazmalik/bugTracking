@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%=link_to "Back to Bugs", project_bugs_path(project_id: @project_bug.project.id),class: 'btn btn-success'%>
 <p>
   <strong>Title:</strong>
   <%= @project_bug.title %>
@@ -8,18 +9,61 @@
   <%= @project_bug.deadline %>
 </p>
 <strong>Bug Image:</strong>
-<div style="width: 400px; height: 400px" >
-<%=image_tag(@project_bug.screenshot, style: 'width: 100%') %>
+<div >
+  <% if @project_bug.screenshot.attached? %>
+<%=image_tag(@project_bug.screenshot,  size: "200x200") %>
+    <% end %>
 </div>
 <p>
   <strong>Description:</strong>
   <%= @project_bug.description %>
 </p>
 <p>
-  <strong>Status:</strong>
-  <%= @project_bug.status %>
+  <strong>Bug Type:</strong>
+  <%= @project_bug.bug_type %>
 </p>
-<%= link_to 'Edit', edit_project_bug_path(@project_bug) %>|
-<%= link_to 'Delete bug', project_bug_path(@project_bug), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure" } %>
+<p>
+  <strong>Status:</strong>
+  <%if current_user.user_type == "qa"%>
+    <%= @project_bug.status %>
+    <%if @project_bug.status !="new" %>
+      <br>
+    <strong>Assigned To:</strong>
+    <%=@developer.name%>
+      <%end %>
+    <%# %>
+  <%# @project_bug.status == "new"%>
 
-<%= link_to 'Back', project_bugs_path %>
+    <%else %>
+    <%= @project_bug.status %>
+  <% if (@project_bug.assigned_id && current_user.id == @project_bug.assigned_id) || @project_bug.status =='new'%>
+<%= form_for(@project_bug, url: project_bug_path(@project_bug), html: {method: :patch}) do |f| %>
+    <%= f.label :status%>
+    <% if @project_bug.bug_type == 'feature' %>
+      <%= f.select :status, ['new', 'started', 'complete']%>
+    <% else %>
+      <%= f.select :status, ['new', 'started', 'resolved']%>
+    <% end %>
+        <%if @project_bug.status == 'new' %>
+    <%= f.submit "Assign Me" ,class:"btn btn-success"%>
+          <%else %>
+          <%= f.submit "save" ,class:"btn btn-success"%>
+          <%end %>
+  <% end %>
+    <%end %>
+    <%if @project_bug.assigned_id !=nil%>
+      <p>
+    <strong>Assigned To:</strong>
+    <%=@developer.name%>
+  </p>
+<%end %>
+    <%end %>
+  <%# else %>
+<!--  status : <%#= @bug.status %>-->
+  <%#end %>
+</p>
+
+<%if current_user.user_type == "qa" %>
+<%= link_to 'Edit', edit_project_bug_path(project_id: @project_bug.project.id),class:"btn btn-success "  %>
+<%end %>
+<%#= link_to 'Back', project_bugs_path %>

@@ -1,19 +1,48 @@
-<h1> Project's bugs</h1>
-<% @project_bugs.each do |bugs| %>
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+<!--<h1> Project's bugs</h1>-->
+<%# @project_bugs.each do |bugs| %>
+<!--    <div class="card" style="width: 18rem;">-->
+<!--      <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">Card title</h5>-->
+<!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--      </div>-->
+<!--      <ul class="list-group list-group-flush">-->
+<!--        <li class="list-group-item">Cras justo odio</li>-->
+<!--        <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--        <li class="list-group-item">Vestibulum at eros</li>-->
+<!--      </ul>-->
+<!--      <div class="card-body">-->
+        <%#= link_to bugs.title, project_bug_path(bugs.id), class: "card-link"%>
+<!--      </div>-->
+<!--    </div>-->
+<%# end %>
+<%=link_to "Create New Bug", new_project_bug_path(project_id: params[:project_id]),class: 'btn btn-success'%>
+<div class="container mt-5">
+  <% if @project_bugs.any? %>
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="list-group">
+          <div class="list-group-item list-group-item-action active">
+            Bugs :
+          </div>
+          <% @project_bugs.each do |bugs| %>
+            <div class="list-group-item list-group-item-action">
+              <!--
+   <span>Project Name :   <%#= link_to project.name,project_bugs_path(project_id: project.id) %></span>-->
+
+
+              Bug Title: <%=link_to bugs.title, project_bug_path(bugs.id)%>
+              <%#if current_user.user_type == "qa" %>
+              <%#=link_to "Create Bug", new_project_bug_path(project_id: project)%>
+              <%#end %>
+              <!--              Project name : <%#=link_to project.name, project_path(project)%>-->
+            </div>
+          <%end %>
+        </div>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
-      <div class="card-body">
-        <%= link_to bugs.title, project_bug_path(bugs.id), class: "card-link"%>
-      </div>
-    </div>
-<% end %>
+  <% else %>
+    <p>No BUGS added by QA</p>
+  <%end %>
+  </div>
+</div>
 

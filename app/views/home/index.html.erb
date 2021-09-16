@@ -7,8 +7,12 @@
       <p>
         Try Bugzilla to keep track of your projects. It will manage everything about your project wether its bugtracking, adding a new feature or assigning team for your project.
       </p>
-      <%= link_to 'sign Up', new_user_registration_path, class:"btn btn-success " %>
-      <%= link_to 'Log in', new_user_session_path, class:"btn btn-success " %>
+      <%if user_signed_in?%>
+        <%= link_to 'Sign Out', destroy_user_session_path, class:"btn btn-success " %>
+      <%else %>
+      <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-success " %>
+      <%= link_to 'Log In', new_user_session_path, class:"btn btn-success " %>
+      <%end %>
     </div>
   </div>
 </div>

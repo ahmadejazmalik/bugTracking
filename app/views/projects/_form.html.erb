@@ -23,7 +23,7 @@
 <h1>Add Developer</h1>
 
   <% User.where(user_type: "developer").each do |user|%>
-        <%= label_tag user.email, nil%>
+        <%= label_tag user.email,nil%>
         <%= form.check_box :user_ids, { multiple: true }, user.id, false %>
       <br>
   <%end %>

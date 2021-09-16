@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :projects, through: :user_projects
   has_many :user_bugs
   has_many :project_bugs, through: :user_bugs
+  # validates :name,:email, :user_type, :encrypted_password, presence: true,uniqueness: true
 end
